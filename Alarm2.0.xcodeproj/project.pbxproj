@@ -9,23 +9,41 @@
 /* Begin PBXBuildFile section */
 		628E751527C867AF00776F6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E751427C867AF00776F6D /* AppDelegate.swift */; };
 		628E751727C867AF00776F6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E751627C867AF00776F6D /* SceneDelegate.swift */; };
-		628E751927C867AF00776F6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E751827C867AF00776F6D /* ViewController.swift */; };
-		628E751C27C867AF00776F6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628E751A27C867AF00776F6D /* Main.storyboard */; };
 		628E751F27C867AF00776F6D /* Alarm2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 628E751D27C867AF00776F6D /* Alarm2_0.xcdatamodeld */; };
 		628E752127C867B000776F6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628E752027C867B000776F6D /* Assets.xcassets */; };
 		628E752427C867B000776F6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 628E752227C867B000776F6D /* LaunchScreen.storyboard */; };
+		628E753127C86C3000776F6D /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753027C86C3000776F6D /* Alarm.swift */; };
+		628E753327C86C8300776F6D /* AlarmMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753227C86C8300776F6D /* AlarmMainViewController.swift */; };
+		628E753627C8736700776F6D /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753527C8736700776F6D /* AddAlarmViewController.swift */; };
+		628E753827C8738600776F6D /* RepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753727C8738600776F6D /* RepeatViewController.swift */; };
+		628E753A27C873A300776F6D /* AlarmLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753927C873A300776F6D /* AlarmLabelViewController.swift */; };
+		628E753C27C8798900776F6D /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753B27C8798900776F6D /* MainTabbarViewController.swift */; };
+		628E753E27C879A000776F6D /* WorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753D27C879A000776F6D /* WorldClockViewController.swift */; };
+		628E754027C879AF00776F6D /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753F27C879AF00776F6D /* StopWatchViewController.swift */; };
+		628E754227C879C100776F6D /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E754127C879C100776F6D /* TimerViewController.swift */; };
+		AF59FC207C5A8B674DF70046 /* Pods_Alarm2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alarm2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D4216B977C073F880BF4CBF /* Pods-Alarm2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alarm2.0.release.xcconfig"; path = "Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0.release.xcconfig"; sourceTree = "<group>"; };
 		628E751127C867AF00776F6D /* Alarm2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alarm2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628E751427C867AF00776F6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		628E751627C867AF00776F6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		628E751827C867AF00776F6D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		628E751B27C867AF00776F6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		628E751E27C867AF00776F6D /* Alarm2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Alarm2_0.xcdatamodel; sourceTree = "<group>"; };
 		628E752027C867B000776F6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		628E752327C867B000776F6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		628E752527C867B000776F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		628E753027C86C3000776F6D /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		628E753227C86C8300776F6D /* AlarmMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMainViewController.swift; sourceTree = "<group>"; };
+		628E753527C8736700776F6D /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
+		628E753727C8738600776F6D /* RepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatViewController.swift; sourceTree = "<group>"; };
+		628E753927C873A300776F6D /* AlarmLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmLabelViewController.swift; sourceTree = "<group>"; };
+		628E753B27C8798900776F6D /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
+		628E753D27C879A000776F6D /* WorldClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockViewController.swift; sourceTree = "<group>"; };
+		628E753F27C879AF00776F6D /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
+		628E754127C879C100776F6D /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		D762A1CE9CA911ABFC838716 /* Pods-Alarm2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alarm2.0.debug.xcconfig"; path = "Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF59FC207C5A8B674DF70046 /* Pods_Alarm2_0.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +63,8 @@
 			children = (
 				628E751327C867AF00776F6D /* Alarm2.0 */,
 				628E751227C867AF00776F6D /* Products */,
+				98C4AF3831790AE554577F6B /* Pods */,
+				F99426BDB45BDDD09B8A9C82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +79,80 @@
 		628E751327C867AF00776F6D /* Alarm2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				628E751427C867AF00776F6D /* AppDelegate.swift */,
-				628E751627C867AF00776F6D /* SceneDelegate.swift */,
-				628E751827C867AF00776F6D /* ViewController.swift */,
-				628E751A27C867AF00776F6D /* Main.storyboard */,
+				628E752B27C867E700776F6D /* App */,
+				628E752E27C86BE400776F6D /* Model */,
+				628E752D27C8681900776F6D /* AlarmViewController */,
+				628E752F27C86BFC00776F6D /* TableViewCell */,
+				628E753427C86CC800776F6D /* TabBarViewController */,
 				628E752027C867B000776F6D /* Assets.xcassets */,
 				628E752227C867B000776F6D /* LaunchScreen.storyboard */,
 				628E752527C867B000776F6D /* Info.plist */,
 				628E751D27C867AF00776F6D /* Alarm2_0.xcdatamodeld */,
 			);
 			path = Alarm2.0;
+			sourceTree = "<group>";
+		};
+		628E752B27C867E700776F6D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				628E751427C867AF00776F6D /* AppDelegate.swift */,
+				628E751627C867AF00776F6D /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		628E752D27C8681900776F6D /* AlarmViewController */ = {
+			isa = PBXGroup;
+			children = (
+				628E753227C86C8300776F6D /* AlarmMainViewController.swift */,
+				628E753527C8736700776F6D /* AddAlarmViewController.swift */,
+				628E753727C8738600776F6D /* RepeatViewController.swift */,
+				628E753927C873A300776F6D /* AlarmLabelViewController.swift */,
+			);
+			path = AlarmViewController;
+			sourceTree = "<group>";
+		};
+		628E752E27C86BE400776F6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				628E753027C86C3000776F6D /* Alarm.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		628E752F27C86BFC00776F6D /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		628E753427C86CC800776F6D /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				628E753B27C8798900776F6D /* MainTabbarViewController.swift */,
+				628E753D27C879A000776F6D /* WorldClockViewController.swift */,
+				628E753F27C879AF00776F6D /* StopWatchViewController.swift */,
+				628E754127C879C100776F6D /* TimerViewController.swift */,
+			);
+			path = TabBarViewController;
+			sourceTree = "<group>";
+		};
+		98C4AF3831790AE554577F6B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D762A1CE9CA911ABFC838716 /* Pods-Alarm2.0.debug.xcconfig */,
+				5D4216B977C073F880BF4CBF /* Pods-Alarm2.0.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F99426BDB45BDDD09B8A9C82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +162,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 628E752827C867B000776F6D /* Build configuration list for PBXNativeTarget "Alarm2.0" */;
 			buildPhases = (
+				ED89798A5F0B05D655657A8A /* [CP] Check Pods Manifest.lock */,
 				628E750D27C867AF00776F6D /* Sources */,
 				628E750E27C867AF00776F6D /* Frameworks */,
 				628E750F27C867AF00776F6D /* Resources */,
+				D75D9996AA1EC7B3022001C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,19 +217,68 @@
 			files = (
 				628E752427C867B000776F6D /* LaunchScreen.storyboard in Resources */,
 				628E752127C867B000776F6D /* Assets.xcassets in Resources */,
-				628E751C27C867AF00776F6D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D75D9996AA1EC7B3022001C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED89798A5F0B05D655657A8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Alarm2.0-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		628E750D27C867AF00776F6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				628E751927C867AF00776F6D /* ViewController.swift in Sources */,
+				628E753C27C8798900776F6D /* MainTabbarViewController.swift in Sources */,
+				628E753827C8738600776F6D /* RepeatViewController.swift in Sources */,
+				628E754027C879AF00776F6D /* StopWatchViewController.swift in Sources */,
+				628E753627C8736700776F6D /* AddAlarmViewController.swift in Sources */,
+				628E754227C879C100776F6D /* TimerViewController.swift in Sources */,
+				628E753327C86C8300776F6D /* AlarmMainViewController.swift in Sources */,
+				628E753E27C879A000776F6D /* WorldClockViewController.swift in Sources */,
 				628E751527C867AF00776F6D /* AppDelegate.swift in Sources */,
+				628E753127C86C3000776F6D /* Alarm.swift in Sources */,
+				628E753A27C873A300776F6D /* AlarmLabelViewController.swift in Sources */,
 				628E751727C867AF00776F6D /* SceneDelegate.swift in Sources */,
 				628E751F27C867AF00776F6D /* Alarm2_0.xcdatamodeld in Sources */,
 			);
@@ -151,14 +287,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		628E751A27C867AF00776F6D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				628E751B27C867AF00776F6D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		628E752227C867B000776F6D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,6 +416,7 @@
 		};
 		628E752927C867B000776F6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D762A1CE9CA911ABFC838716 /* Pods-Alarm2.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -298,7 +427,6 @@
 				INFOPLIST_FILE = Alarm2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -316,6 +444,7 @@
 		};
 		628E752A27C867B000776F6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D4216B977C073F880BF4CBF /* Pods-Alarm2.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -326,7 +455,6 @@
 				INFOPLIST_FILE = Alarm2.0/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
