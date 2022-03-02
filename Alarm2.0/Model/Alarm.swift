@@ -7,14 +7,109 @@
 
 import Foundation
 
-struct Alarm {
-    var alarms: [Alarm] = []
+// 管理鬧鐘
+class AlarmDatabase {
     
+    var valueChanged: ( ([Alarm]) -> Void)?
+    
+    // singleton
+    private let userDefaultKey = "AlarmDatabase"
+    private let userDefault = UserDefaults.standard
+    
+    private var alarms: [Alarm] = [] {
+        didSet {
+//            saveAlarms()
+            valueChanged?(alarms)
+        }
+    }
+    
+    init() {
+//        load()
+    }
+    
+    var numberOfAlarms: Int {
+        return alarms.count
+    }
+    
+    func getAlarm(at index: Int) -> Alarm {
+        return alarms[index]
+    }
+   
+    func addAlarm(_ alarm: Alarm) {
+        alarms.append(alarm)
+        alarms.sort(by: { $0.date < $1.date })
+    }
+    
+    func deleteAlarm(at index: Int) {
+        alarms.remove(at: index)
+        alarms.sort(by: { $0.date < $1.date })
+    }
+    
+    func replacingAlarm(_ alarm: Alarm) {
+        guard let index = alarms.firstIndex(where: { $0.id == alarm.id }) else {
+            return
+        }
+        replacingAlarm(alarm, at: index)
+    }
+    
+    func replacingAlarm(_ alarm: Alarm, at index: Int) {
+        alarms[index] = alarm
+        alarms.sort(by: { $0.date < $1.date })
+    }
+    
+    
+    //MARK: - UserDefaults
+    private func saveAlarms() {
+        do {
+            print("Save alarms: \(alarms.count)")
+            let data = try JSONEncoder().encode(alarms)
+            userDefault.set(data, forKey: userDefaultKey)
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func load() {
+        guard let data = userDefault.data(forKey: userDefaultKey) else {
+            return
+        }
+        do {
+            let decoded = try JSONDecoder().decode([Alarm].self, from: data)
+            print("Load alarm count: \(decoded.count)")
+            self.alarms = decoded
+        } catch {
+            print(error)
+        }
+    }
+}
+
+
+struct Alarm: Codable {
+    
+    init() {
+        self.id = Alarm.getOrderNumber()
+        self.date = Date()
+        self.label = "鬧鐘"
+        self.isOn = true
+        self.selectDay = []
+        self.modeSelection = .add
+    }
+    
+    static var orderNumbers = 0
+    
+    static func getOrderNumber() -> Int {
+        orderNumbers += 1
+        //print("產生 orderNumber: #\(orderNumbers)")
+        return orderNumbers
+    }
+    
+    var id: Int
     var date: Date = Date()
     var label: String = "鬧鐘"
     var isOn: Bool = true
     var selectDay: Set<Day> = []
     var modeSelection: ModeSelection = .add
+    
     
     var repeatString: String {
         switch selectDay {
@@ -34,6 +129,30 @@ struct Alarm {
         }
     }
     
+    var alarmAppearString: String {
+        switch selectDay {
+        case [.mon,.tue,.wed,.thu,.fri]:
+            return "，平日"
+        case [.sat,.sun]:
+            return "，週末"
+        case [.sun,.mon,.tue,.wed,.thu,.fri,.sat]:
+            return "，每天"
+        case []:
+            return ""
+        default :
+            if selectDay.count > 1 {
+                return "，" + selectDay
+                    .sorted(by: { $0.rawValue < $1.rawValue })
+                    .map { $0.detail }
+                    .joined(separator: " ")
+            }
+            return selectDay
+                .sorted(by: { $0.rawValue < $1.rawValue })
+                .map( { "，每\($0.detail)" } )
+                .joined(separator: " ")
+        }
+    }
+    
     func appearTime() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm"
@@ -43,8 +162,11 @@ struct Alarm {
     
     func appearAmPm() -> String {
         let formatter = DateFormatter()
+        formatter.locale = .current
         formatter.dateFormat = "a"
         let alarmAmPm = formatter.string(from: date)
+//        return alarmAmPm
+        
         if alarmAmPm == "AM" {
             return "上午"
         } else {
@@ -53,8 +175,9 @@ struct Alarm {
     }
 }
 
+
 // MARK: - Enum
-enum ModeSelection: String, CaseIterable {
+enum ModeSelection: String, CaseIterable, Codable {
     case add, edit
     
     var title: String {
@@ -84,7 +207,7 @@ enum AddCellTitle: String, CaseIterable {
     }
 }
 
-enum Day: Int, CaseIterable {
+enum Day: Int, CaseIterable, Codable {
     case sun, mon, tue, wed, thu, fri, sat
     
     var text: String {
@@ -125,3 +248,4 @@ enum Day: Int, CaseIterable {
         }
     }
 }
+

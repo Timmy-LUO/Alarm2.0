@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import SnapKit
 
 class AlarmMainViewController: UIViewController {
     
     // MARK: - Properites
-    var tempAlarm = Alarm()
+    var datebase = AlarmDatabase()
     let addAlarmViewController = AddAlarmViewController()
-    weak var AlarmSetDelegate: AlarmSetDelegate?
+    weak var alarmSetDelegate: AlarmSetDelegate?
+
     
     // MARK: - UI
-    let AlarmMainTableView: UITableView = {
+    let alarmMainTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(AlarmMainTableViewCell.self, forCellReuseIdentifier: AlarmMainTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,22 +29,26 @@ class AlarmMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "鬧鐘"
-        AlarmMainTableView.dataSource = self
-        AlarmMainTableView.delegate = self
-        setNavigationItem()
-        
+        alarmMainTableView.dataSource = self
+        alarmMainTableView.delegate = self
+        setupViews()
+        setNavigationItem()        
+        datebase.valueChanged = { [weak self] _ in
+//            print("reload")
+            self?.alarmMainTableView.reloadData()
+        }
     }
     
     //MARK: - SetEditing
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        AlarmMainTableView.setEditing(editing, animated: true)
-        if AlarmMainTableView.isEditing {
+        alarmMainTableView.setEditing(editing, animated: true)
+        if alarmMainTableView.isEditing {
             self.navigationItem.leftBarButtonItem?.title = "完成"
-            AlarmMainTableView.allowsSelectionDuringEditing = true
+            alarmMainTableView.allowsSelectionDuringEditing = true
         } else {
             self.navigationItem.leftBarButtonItem?.title = "編輯"
-            AlarmMainTableView.allowsSelectionDuringEditing = false
+            alarmMainTableView.allowsSelectionDuringEditing = false
         }
     }
     
@@ -60,58 +66,88 @@ class AlarmMainViewController: UIViewController {
     }
     //MARK: AddButton
     @objc func addButton() {
-        
-        let navigationController = UINavigationController(rootViewController: addAlarmViewController)
+        let vc = AddAlarmViewController()
+        vc.alarmSetDelegate = self
+        let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true, completion: nil)
+        setEditing(false, animated: false)
+
     }
     
-    
-    
+    func setupViews() {
+        view.addSubview(alarmMainTableView)
+        
+        alarmMainTableView.snp.makeConstraints { make in
+            make.edges.equalTo(self.view)
+        }
+    }
 }
 
+//MARK: - TableViewDataSource
 extension AlarmMainViewController: UITableViewDataSource {
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return datebase.numberOfAlarms
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmMainTableViewCell.identifier, for: indexPath) as? AlarmMainTableViewCell else { return UITableViewCell() }
-        //let alarmIndex = tempAlarm.alarms[indexPath.row]
-        cell.timeLabel.text = tempAlarm.appearTime()
-        cell.amPmLabel.text = tempAlarm.appearAmPm()
-        cell.detailLabel.text = tempAlarm.alarms[indexPath.row].label + tempAlarm.alarms[indexPath.row].repeatString
-        let isOnSwitch = UISwitch(frame: .zero)
-        isOnSwitch.isOn = tempAlarm.alarms[indexPath.row].isOn
-        cell.accessoryView = isOnSwitch
-        cell.editingAccessoryType = .disclosureIndicator
-        AlarmMainTableView.rowHeight = 100
-        cell.selectionStyle = .none
-        
+        let alarm = datebase.getAlarm(at: indexPath.row)
+        cell.update(alarm: alarm)
         return cell
     }
 }
 
+//MARK: - TableViewDelegate
 extension AlarmMainViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.section == 1 {
+//            if AlarmMainTableView.allowsSelectionDuringEditing {
+//                let navigationController = UINavigationController(rootViewController: addAlarmViewController)
+//                let vc = navigationController.viewControllers.first as! AddAlarmViewController
+//                vc.tempAlarm = tempAlarm.alarms[indexPath.row]
+//                vc.cellIndexPath = indexPath.row
+//                vc.alarmSetDelegate = self
+//                present(navigationController, animated: true, completion: nil)
+//                setEditing(false, animated: false)
+//            }
+//        }
+//    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let alarm = datebase.getAlarm(at: indexPath.row)
+//        alarm.label = "123"
+//        print(alarm.id)
+//        datebase.replacingAlarm(alarm)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            datebase.deleteAlarm(at: indexPath.row)
+        default:
+            break
+        }
+    }
 }
 
-//MARK: - add, edit, delete
+
+//MARK: - add, edit, delete, sort
 extension AlarmMainViewController: AlarmSetDelegate {
+    
     func saveAlarm(alarm: Alarm) {
-        tempAlarm.alarms.append(alarm)
+        datebase.addAlarm(alarm)
     }
-    
     func valueChange(alarm: Alarm, index: Int) {
-        tempAlarm.alarms[index] = alarm
+        datebase.replacingAlarm(alarm, at: index)
     }
-    
     func deleteAlarm(index: Int) {
-        tempAlarm.alarms.remove(at: index)
+        datebase.deleteAlarm(at: index)
     }
-    
-    func alarmSort() {
-        
-    }
-    
     
 }

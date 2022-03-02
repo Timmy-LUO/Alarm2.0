@@ -12,6 +12,8 @@ class DatePickerHeaderView: UITableViewHeaderFooterView {
     
     static let identifier = "datePickerHeaderView"
     
+    var dateChanged: ( (Date) -> Void)?
+    
     //MARK: - UI
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -21,7 +23,7 @@ class DatePickerHeaderView: UITableViewHeaderFooterView {
         datePicker.locale = Locale(identifier: "zh_Hant_TW")
         datePicker.preferredDatePickerStyle = .wheels
 //        datePicker.setValue(UIColor.white, forKey: "text")
-//        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
     
@@ -42,5 +44,12 @@ class DatePickerHeaderView: UITableViewHeaderFooterView {
         datePicker.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
+        
+        datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
+    }
+    
+    @objc func datePickerChanged(_ datePicker: UIDatePicker) {
+//        print(datePicker.date)
+        dateChanged?(datePicker.date)
     }
 }

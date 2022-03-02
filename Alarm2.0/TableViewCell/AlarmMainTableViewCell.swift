@@ -69,4 +69,17 @@ class AlarmMainTableViewCell: UITableViewCell {
             make.bottom.equalTo(10)
         }
     }
+    
+    func update(alarm: Alarm) {
+        amPmLabel.text = alarm.appearAmPm()
+        timeLabel.text = alarm.appearTime()
+        detailLabel.text = alarm.label + alarm.alarmAppearString
+        
+        let isOnSwitch = UISwitch(frame: .zero)
+        isOnSwitch.isOn = alarm.isOn
+        accessoryView = isOnSwitch
+        editingAccessoryType = .disclosureIndicator
+        //AlarmMainTableView.rowHeight = 100
+        selectionStyle = .none
+    }
 }

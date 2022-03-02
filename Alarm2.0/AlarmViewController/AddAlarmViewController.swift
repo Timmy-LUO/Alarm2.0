@@ -12,7 +12,13 @@ class AddAlarmViewController: UIViewController {
     
     // MARK: - Properites
     var addAlarmCell: [AddCellTitle] = [.rep, .tag, .sound, .snooze]
-    var tempAlarm = Alarm()
+    
+    var alarm: Alarm!
+    var selection: ModeSelection?
+    
+    weak var alarmSetDelegate: AlarmSetDelegate?
+    var cellIndexPath: Int = 1
+    
     
     // MARK: - UI
     let addAlarmTableView: UITableView = {
@@ -27,14 +33,10 @@ class AddAlarmViewController: UIViewController {
         return tableView
     }()
     
-    let tableViewHeader: UITableViewHeaderFooterView = {
-        let header = UITableViewHeaderFooterView()
-        return header
-    }()
-    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkAlarm()
         view.backgroundColor = .black
         addAlarmTableView.dataSource = self
         addAlarmTableView.delegate = self
@@ -43,11 +45,22 @@ class AddAlarmViewController: UIViewController {
         
     }
     
+    private func checkAlarm() {
+        if alarm == nil {
+            // add
+            alarm = Alarm()
+            title = "加入鬧鐘"
+        } else {
+            // edit
+            title = "編輯鬧鐘"
+        }
+    }
+    
     
     //MARK: - SetNaviBarItem
     func setupNavigationBarButtonItem() {
         //title
-        title = tempAlarm.modeSelection.title
+//        title = alarm.modeSelection.title
         
         //Left Button
         let cancelButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelButton))
@@ -61,7 +74,12 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func saveButton() {
-        
+        if alarm.modeSelection == .add {
+            alarmSetDelegate?.saveAlarm(alarm: alarm)
+        } else {
+            alarmSetDelegate?.valueChange(alarm: alarm, index: cellIndexPath)
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func cancelButton() {
@@ -85,8 +103,8 @@ class AddAlarmViewController: UIViewController {
 
 //MARK: - UITableViewDataSource
 extension AddAlarmViewController: UITableViewDataSource {
-    func numberOfSections(_ tableView: UITableView) -> Int {
-        switch tempAlarm.modeSelection {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        switch alarm.modeSelection {
         case .add:
             return 1
         case .edit:
@@ -96,7 +114,25 @@ extension AddAlarmViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addAlarmCell.count
+        //return addAlarmCell.count
+        switch alarm.modeSelection {
+        case .edit:
+            switch section {
+            case 0:
+                return 3
+            case 1:
+                return 4
+            default:
+                return 1
+            }
+        case .add:
+            switch section {
+            case 0:
+                return 3
+            default:
+                return 4
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,10 +147,10 @@ extension AddAlarmViewController: UITableViewDataSource {
             if indexPath.section == 0 {
                 cell.titleLabel.text = addAlarmCell[indexPath.row].text
                 if indexPath.row == 0 {
-                    cell.contentLabel.text = tempAlarm.repeatString
+                    cell.contentLabel.text = alarm.repeatString
                 }
                 if indexPath.row == 1 {
-                    cell.contentLabel.text = tempAlarm.label
+                    cell.contentLabel.text = alarm.label
                 }
                 if indexPath.row == 2 {
                     cell.contentLabel.text = "經典"
@@ -123,6 +159,10 @@ extension AddAlarmViewController: UITableViewDataSource {
             }
             return cell
         }
+        
+        
+        
+        
     }
 }
 
@@ -134,12 +174,12 @@ extension AddAlarmViewController: UITableViewDelegate {
         case .rep:
             let repeatVC = RepeatViewController()
             repeatVC.delegate = self
-            repeatVC.isSelectedDay = tempAlarm.selectDay
+            repeatVC.isSelectedDay = alarm.selectDay
             self.navigationController?.pushViewController(repeatVC, animated: true)
         case .tag:
             let alarmLabelVC = AlarmLabelViewController()
             alarmLabelVC.delegate = self
-            alarmLabelVC.alarmLabel = tempAlarm.label
+            alarmLabelVC.alarmLabel = alarm.label
             self.navigationController?.pushViewController(alarmLabelVC, animated: true)
         default:
             break
@@ -147,7 +187,10 @@ extension AddAlarmViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DatePickerHeaderView.identifier)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DatePickerHeaderView.identifier) as! DatePickerHeaderView
+        header.dateChanged = { [weak self] date in
+            self?.alarm.date = date
+        }
         return header
     }
     
@@ -161,7 +204,7 @@ extension AddAlarmViewController: UITableViewDelegate {
 //MARK: - RepeatToAdd
 extension AddAlarmViewController: RepeatToAdd {
     func repeatToAdd(repeatSet: Set<Day>) {
-        tempAlarm.selectDay = repeatSet
+        alarm.selectDay = repeatSet
         addAlarmTableView.reloadData()
     }
 }
@@ -169,7 +212,8 @@ extension AddAlarmViewController: RepeatToAdd {
 //MARK: - LabelToAdd
 extension AddAlarmViewController: LabelToAdd {
     func labelToAdd(labelSet: String) {
-        tempAlarm.label = labelSet
+        alarm.label = labelSet
         addAlarmTableView.reloadData()
     }
 }
+
