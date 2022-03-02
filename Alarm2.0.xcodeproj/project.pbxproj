@@ -21,6 +21,12 @@
 		628E753E27C879A000776F6D /* WorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753D27C879A000776F6D /* WorldClockViewController.swift */; };
 		628E754027C879AF00776F6D /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E753F27C879AF00776F6D /* StopWatchViewController.swift */; };
 		628E754227C879C100776F6D /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E754127C879C100776F6D /* TimerViewController.swift */; };
+		628E754427C8A90C00776F6D /* AddAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E754327C8A90C00776F6D /* AddAlarmTableViewCell.swift */; };
+		628E754727C8DFF000776F6D /* DatePickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E754627C8DFF000776F6D /* DatePickerHeaderView.swift */; };
+		62CF4D0527CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0427CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift */; };
+		62CF4D0727CDEE9D006B05E7 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0627CDEE9D006B05E7 /* Protocol.swift */; };
+		62CF4D0927CDFBCF006B05E7 /* RepeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */; };
+		62CF4D0B27CE17FC006B05E7 /* AlarmMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0A27CE17FC006B05E7 /* AlarmMainTableViewCell.swift */; };
 		AF59FC207C5A8B674DF70046 /* Pods_Alarm2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +49,12 @@
 		628E753D27C879A000776F6D /* WorldClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockViewController.swift; sourceTree = "<group>"; };
 		628E753F27C879AF00776F6D /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		628E754127C879C100776F6D /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		628E754327C8A90C00776F6D /* AddAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewCell.swift; sourceTree = "<group>"; };
+		628E754627C8DFF000776F6D /* DatePickerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerHeaderView.swift; sourceTree = "<group>"; };
+		62CF4D0427CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		62CF4D0627CDEE9D006B05E7 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTableViewCell.swift; sourceTree = "<group>"; };
+		62CF4D0A27CE17FC006B05E7 /* AlarmMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMainTableViewCell.swift; sourceTree = "<group>"; };
 		D762A1CE9CA911ABFC838716 /* Pods-Alarm2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alarm2.0.debug.xcconfig"; path = "Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +96,7 @@
 				628E752D27C8681900776F6D /* AlarmViewController */,
 				628E752F27C86BFC00776F6D /* TableViewCell */,
 				628E753427C86CC800776F6D /* TabBarViewController */,
+				628E754527C8DFA600776F6D /* Other */,
 				628E752027C867B000776F6D /* Assets.xcassets */,
 				628E752227C867B000776F6D /* LaunchScreen.storyboard */,
 				628E752527C867B000776F6D /* Info.plist */,
@@ -116,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				628E753027C86C3000776F6D /* Alarm.swift */,
+				62CF4D0627CDEE9D006B05E7 /* Protocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,6 +137,10 @@
 		628E752F27C86BFC00776F6D /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				62CF4D0A27CE17FC006B05E7 /* AlarmMainTableViewCell.swift */,
+				628E754327C8A90C00776F6D /* AddAlarmTableViewCell.swift */,
+				62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */,
+				62CF4D0427CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -136,6 +154,14 @@
 				628E754127C879C100776F6D /* TimerViewController.swift */,
 			);
 			path = TabBarViewController;
+			sourceTree = "<group>";
+		};
+		628E754527C8DFA600776F6D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				628E754627C8DFF000776F6D /* DatePickerHeaderView.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		98C4AF3831790AE554577F6B /* Pods */ = {
@@ -273,14 +299,20 @@
 				628E753827C8738600776F6D /* RepeatViewController.swift in Sources */,
 				628E754027C879AF00776F6D /* StopWatchViewController.swift in Sources */,
 				628E753627C8736700776F6D /* AddAlarmViewController.swift in Sources */,
+				62CF4D0927CDFBCF006B05E7 /* RepeatTableViewCell.swift in Sources */,
+				628E754427C8A90C00776F6D /* AddAlarmTableViewCell.swift in Sources */,
+				62CF4D0B27CE17FC006B05E7 /* AlarmMainTableViewCell.swift in Sources */,
+				62CF4D0527CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift in Sources */,
 				628E754227C879C100776F6D /* TimerViewController.swift in Sources */,
 				628E753327C86C8300776F6D /* AlarmMainViewController.swift in Sources */,
 				628E753E27C879A000776F6D /* WorldClockViewController.swift in Sources */,
 				628E751527C867AF00776F6D /* AppDelegate.swift in Sources */,
 				628E753127C86C3000776F6D /* Alarm.swift in Sources */,
+				62CF4D0727CDEE9D006B05E7 /* Protocol.swift in Sources */,
 				628E753A27C873A300776F6D /* AlarmLabelViewController.swift in Sources */,
 				628E751727C867AF00776F6D /* SceneDelegate.swift in Sources */,
 				628E751F27C867AF00776F6D /* Alarm2_0.xcdatamodeld in Sources */,
+				628E754727C8DFF000776F6D /* DatePickerHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

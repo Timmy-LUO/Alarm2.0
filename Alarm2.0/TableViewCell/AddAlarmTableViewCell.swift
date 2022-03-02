@@ -6,18 +6,56 @@
 //
 
 import UIKit
+import SnapKit
 
 class AddAlarmTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    static let identifier = "addAlarmTableViewCell"
+    
+    //MARK: - UI
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let contentLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let detailImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        return imageView
+    }()
+    
+    
+    //MARK: - Init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setViews()
+        self.accessoryView = detailImageView
+        self.tintColor = .systemGray4
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
+    //MARK: - SetViews
+    func setViews() {
+        self.addSubview(titleLabel)
+        self.addSubview(contentLabel)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self)
+            make.leading.equalTo(self).offset(10)
+        }
+        
+        contentLabel.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self)
+            make.trailing.equalTo(self).offset(-50)
+        }
+    }
 }

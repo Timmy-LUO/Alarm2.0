@@ -9,19 +9,25 @@ import UIKit
 
 class MainTabbarViewController: UITabBarController {
     
+    
+    //MARK: - Properites
     let worldClockVC = WorldClockViewController()
     let alarmVC = AlarmMainViewController()
     let stopWatchVC = StopWatchViewController()
     let timerVC = TimerViewController()
     
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //MARK: - ItemImage
         worldClockVC.tabBarItem.image = UIImage(systemName: "network")
         alarmVC.tabBarItem.image = UIImage(systemName: "alarm.fill")
         stopWatchVC.tabBarItem.image = UIImage(systemName: "stopwatch.fill")
         timerVC.tabBarItem.image = UIImage(systemName: "timer")
         
+        //MARK: - Title
         worldClockVC.title = "世界鬧鐘"
         alarmVC.title = "鬧鐘"
         stopWatchVC.title = "碼表"

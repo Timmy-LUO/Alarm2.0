@@ -13,7 +13,8 @@ struct Alarm {
     var date: Date = Date()
     var label: String = "鬧鐘"
     var isOn: Bool = true
-    var selectDay: [Day] = []
+    var selectDay: Set<Day> = []
+    var modeSelection: ModeSelection = .add
     
     var repeatString: String {
         switch selectDay {
@@ -33,10 +34,39 @@ struct Alarm {
         }
     }
     
+    func appearTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm"
+        let alarmTime = formatter.string(from: date)
+        return alarmTime
+    }
     
+    func appearAmPm() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a"
+        let alarmAmPm = formatter.string(from: date)
+        if alarmAmPm == "AM" {
+            return "上午"
+        } else {
+            return "下午"
+        }
+    }
 }
 
 // MARK: - Enum
+enum ModeSelection: String, CaseIterable {
+    case add, edit
+    
+    var title: String {
+        switch self {
+        case .add:
+            return "加入鬧鐘"
+        case .edit:
+            return "編輯鬧鐘"
+        }
+    }
+}
+
 enum AddCellTitle: String, CaseIterable {
     case rep, tag, sound, snooze
     
@@ -93,6 +123,5 @@ enum Day: Int, CaseIterable {
         case .sat:
             return "週六"
         }
-        
     }
 }

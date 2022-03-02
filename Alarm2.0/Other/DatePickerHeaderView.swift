@@ -6,15 +6,41 @@
 //
 
 import UIKit
+import SnapKit
 
 class DatePickerHeaderView: UITableViewHeaderFooterView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    static let identifier = "datePickerHeaderView"
+    
+    //MARK: - UI
+    let datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        // DatePicker顯示時間
+        datePicker.datePickerMode = .time
+        // DatePicker顯示24小時制
+        datePicker.locale = Locale(identifier: "zh_Hant_TW")
+        datePicker.preferredDatePickerStyle = .wheels
+//        datePicker.setValue(UIColor.white, forKey: "text")
+//        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        return datePicker
+    }()
+    
+    //MARK: - Init
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        setViews()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - SetViews
+    func setViews() {
+        contentView.addSubview(datePicker)
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
+    }
 }
