@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Protocol
 protocol RepeatToAdd: AnyObject {
     func repeatToAdd(repeatSet: Set<Day>)
 }

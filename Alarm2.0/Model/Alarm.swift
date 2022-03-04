@@ -8,6 +8,7 @@
 import Foundation
 
 // 管理鬧鐘
+// MARK: - AlarmDatabase
 class AlarmDatabase {
     
     var valueChanged: ( ([Alarm]) -> Void)?
@@ -16,7 +17,7 @@ class AlarmDatabase {
     private let userDefaultKey = "AlarmDatabase"
     private let userDefault = UserDefaults.standard
     
-    private var alarms: [Alarm] = [] {
+    private(set) var alarms: [Alarm] = [] {
         didSet {
 //            saveAlarms()
             valueChanged?(alarms)
@@ -57,11 +58,10 @@ class AlarmDatabase {
         alarms.sort(by: { $0.date < $1.date })
     }
     
-    
     //MARK: - UserDefaults
     private func saveAlarms() {
         do {
-            print("Save alarms: \(alarms.count)")
+//            print("Save alarms: \(alarms.count)")
             let data = try JSONEncoder().encode(alarms)
             userDefault.set(data, forKey: userDefaultKey)
         } catch {
@@ -75,7 +75,7 @@ class AlarmDatabase {
         }
         do {
             let decoded = try JSONDecoder().decode([Alarm].self, from: data)
-            print("Load alarm count: \(decoded.count)")
+//            print("Load alarm count: \(decoded.count)")
             self.alarms = decoded
         } catch {
             print(error)
@@ -83,7 +83,7 @@ class AlarmDatabase {
     }
 }
 
-
+// MARK: - Alarm
 struct Alarm: Codable {
     
     init() {
@@ -109,7 +109,6 @@ struct Alarm: Codable {
     var isOn: Bool = true
     var selectDay: Set<Day> = []
     var modeSelection: ModeSelection = .add
-    
     
     var repeatString: String {
         switch selectDay {
@@ -165,8 +164,6 @@ struct Alarm: Codable {
         formatter.locale = .current
         formatter.dateFormat = "a"
         let alarmAmPm = formatter.string(from: date)
-//        return alarmAmPm
-        
         if alarmAmPm == "AM" {
             return "上午"
         } else {

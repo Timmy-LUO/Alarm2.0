@@ -11,7 +11,8 @@ import SnapKit
 class AlarmMainViewController: UIViewController {
     
     // MARK: - Properites
-    var datebase = AlarmDatabase()
+    var database = AlarmDatabase()
+    var tempAlarm = Alarm()
     let addAlarmViewController = AddAlarmViewController()
     weak var alarmSetDelegate: AlarmSetDelegate?
 
@@ -33,7 +34,7 @@ class AlarmMainViewController: UIViewController {
         alarmMainTableView.delegate = self
         setupViews()
         setNavigationItem()        
-        datebase.valueChanged = { [weak self] _ in
+        database.valueChanged = { [weak self] _ in
 //            print("reload")
             self?.alarmMainTableView.reloadData()
         }
@@ -64,6 +65,7 @@ class AlarmMainViewController: UIViewController {
         addButton.tintColor = .orange
         self.navigationItem.rightBarButtonItem = addButton
     }
+    
     //MARK: AddButton
     @objc func addButton() {
         let vc = AddAlarmViewController()
@@ -74,6 +76,7 @@ class AlarmMainViewController: UIViewController {
 
     }
     
+    //MARK: - SetupViews
     func setupViews() {
         view.addSubview(alarmMainTableView)
         
@@ -88,12 +91,12 @@ extension AlarmMainViewController: UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datebase.numberOfAlarms
+        return database.numberOfAlarms
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmMainTableViewCell.identifier, for: indexPath) as? AlarmMainTableViewCell else { return UITableViewCell() }
-        let alarm = datebase.getAlarm(at: indexPath.row)
+        let alarm = database.getAlarm(at: indexPath.row)
         cell.update(alarm: alarm)
         return cell
     }
@@ -101,26 +104,23 @@ extension AlarmMainViewController: UITableViewDataSource {
 
 //MARK: - TableViewDelegate
 extension AlarmMainViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 1 {
-//            if AlarmMainTableView.allowsSelectionDuringEditing {
-//                let navigationController = UINavigationController(rootViewController: addAlarmViewController)
-//                let vc = navigationController.viewControllers.first as! AddAlarmViewController
-//                vc.tempAlarm = tempAlarm.alarms[indexPath.row]
-//                vc.cellIndexPath = indexPath.row
-//                vc.alarmSetDelegate = self
-//                present(navigationController, animated: true, completion: nil)
-//                setEditing(false, animated: false)
-//            }
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let alarm = datebase.getAlarm(at: indexPath.row)
+        let vc = AddAlarmViewController()
+        vc.alarmSetDelegate = self
+        vc.alarm = database.alarms[indexPath.row]
+        vc.cellIndexPath = indexPath.row
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true, completion: nil)
+        setEditing(false, animated: false)
+        
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        var alarm = datebase.getAlarm(at: indexPath.row)
 //        alarm.label = "123"
 //        print(alarm.id)
 //        datebase.replacingAlarm(alarm)
-    }
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
@@ -129,7 +129,7 @@ extension AlarmMainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            datebase.deleteAlarm(at: indexPath.row)
+            database.deleteAlarm(at: indexPath.row)
         default:
             break
         }
@@ -141,13 +141,14 @@ extension AlarmMainViewController: UITableViewDelegate {
 extension AlarmMainViewController: AlarmSetDelegate {
     
     func saveAlarm(alarm: Alarm) {
-        datebase.addAlarm(alarm)
-    }
-    func valueChange(alarm: Alarm, index: Int) {
-        datebase.replacingAlarm(alarm, at: index)
-    }
-    func deleteAlarm(index: Int) {
-        datebase.deleteAlarm(at: index)
+        database.addAlarm(alarm)
     }
     
+    func valueChange(alarm: Alarm, index: Int) {
+        database.replacingAlarm(alarm, at: index)
+    }
+    
+    func deleteAlarm(index: Int) {
+        database.deleteAlarm(at: index)
+    }
 }

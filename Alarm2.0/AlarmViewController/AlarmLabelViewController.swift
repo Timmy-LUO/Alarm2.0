@@ -62,6 +62,7 @@ class AlarmLabelViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .orange
     }
     
+    //MARK: - SetupViews
     func setupViews() {
         view.addSubview(alarmLabelTextField)
         

@@ -17,7 +17,7 @@ class AddAlarmViewController: UIViewController {
     var selection: ModeSelection?
     
     weak var alarmSetDelegate: AlarmSetDelegate?
-    var cellIndexPath: Int = 1
+    var cellIndexPath: Int = 0
     
     
     // MARK: - UI
@@ -45,6 +45,7 @@ class AddAlarmViewController: UIViewController {
         
     }
     
+    //MARK: - CheckAlarmTitle
     private func checkAlarm() {
         if alarm == nil {
             // add
@@ -56,12 +57,8 @@ class AddAlarmViewController: UIViewController {
         }
     }
     
-    
     //MARK: - SetNaviBarItem
     func setupNavigationBarButtonItem() {
-        //title
-//        title = alarm.modeSelection.title
-        
         //Left Button
         let cancelButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelButton))
         cancelButton.tintColor = .orange
@@ -73,6 +70,7 @@ class AddAlarmViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = button
     }
     
+    //MARK: - SaveButton
     @objc func saveButton() {
         if alarm.modeSelection == .add {
             alarmSetDelegate?.saveAlarm(alarm: alarm)
@@ -82,6 +80,7 @@ class AddAlarmViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK: - CancelButton
     @objc func cancelButton() {
         dismiss(animated: true, completion: nil)
     }
@@ -97,8 +96,6 @@ class AddAlarmViewController: UIViewController {
             make.trailing.equalTo(-0)
         }
     }
-    
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -106,33 +103,40 @@ extension AddAlarmViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch alarm.modeSelection {
         case .add:
+            print("add  1 section")
             return 1
         case .edit:
+            print("edit 2 section")
             return 2
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return addAlarmCell.count
-        switch alarm.modeSelection {
-        case .edit:
-            switch section {
-            case 0:
-                return 3
-            case 1:
-                return 4
-            default:
-                return 1
-            }
-        case .add:
-            switch section {
-            case 0:
-                return 3
-            default:
-                return 4
-            }
-        }
+        return addAlarmCell.count
+        
+//        switch alarm.modeSelection {
+//        case .edit:
+//            switch section {
+//            case 0:
+//                print("c0 3")
+//                return 2
+//            case 1:
+//                print("c1 4")
+//                return 2
+//            default:
+//                print("d 1")
+//                return 2
+//            }
+//        case .add:
+//            switch section {
+//            case 0:
+//                print("c 4")
+//                return 4
+//            default:
+//                print("d 4")
+//                return 4
+//            }
+//        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -197,9 +201,8 @@ extension AddAlarmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
-    
 }
+
 
 //MARK: - RepeatToAdd
 extension AddAlarmViewController: RepeatToAdd {
