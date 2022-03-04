@@ -73,7 +73,6 @@ class AlarmMainViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true, completion: nil)
         setEditing(false, animated: false)
-
     }
     
     //MARK: - SetupViews
@@ -88,7 +87,6 @@ class AlarmMainViewController: UIViewController {
 
 //MARK: - TableViewDataSource
 extension AlarmMainViewController: UITableViewDataSource {
-    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return database.numberOfAlarms
@@ -106,13 +104,12 @@ extension AlarmMainViewController: UITableViewDataSource {
 extension AlarmMainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AddAlarmViewController()
+        let navigationController = UINavigationController(rootViewController: vc)
         vc.alarmSetDelegate = self
         vc.alarm = database.alarms[indexPath.row]
         vc.cellIndexPath = indexPath.row
-        let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true, completion: nil)
         setEditing(false, animated: false)
-        
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

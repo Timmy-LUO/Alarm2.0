@@ -57,9 +57,8 @@ class RepeatViewController: UIViewController {
         navigationItem.title = "重複"
         self.navigationController?.navigationBar.tintColor = .orange
     }
-    
-
 }
+
  // MARK: - UITableViewDataSource
 extension RepeatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

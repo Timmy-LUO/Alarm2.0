@@ -14,10 +14,10 @@ class AddAlarmViewController: UIViewController {
     var addAlarmCell: [AddCellTitle] = [.rep, .tag, .sound, .snooze]
     
     var alarm: Alarm!
-    var selection: ModeSelection?
+    var selection: ModelSelection?
     
     weak var alarmSetDelegate: AlarmSetDelegate?
-    var cellIndexPath: Int = 0
+    var cellIndexPath: Int?
     
     
     // MARK: - UI
@@ -26,6 +26,7 @@ class AddAlarmViewController: UIViewController {
         tableView .register(DatePickerHeaderView.self, forHeaderFooterViewReuseIdentifier: DatePickerHeaderView.identifier)
         tableView.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
         tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.sectionHeaderHeight = 200
         tableView.separatorStyle = .singleLine
         tableView.isScrollEnabled = false
@@ -72,10 +73,10 @@ class AddAlarmViewController: UIViewController {
     
     //MARK: - SaveButton
     @objc func saveButton() {
-        if alarm.modeSelection == .add {
+        if title == "加入鬧鐘" {
             alarmSetDelegate?.saveAlarm(alarm: alarm)
         } else {
-            alarmSetDelegate?.valueChange(alarm: alarm, index: cellIndexPath)
+            alarmSetDelegate?.valueChange(alarm: alarm, index: cellIndexPath!)
         }
         dismiss(animated: true, completion: nil)
     }
@@ -101,14 +102,17 @@ class AddAlarmViewController: UIViewController {
 //MARK: - UITableViewDataSource
 extension AddAlarmViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        switch alarm.modeSelection {
-        case .add:
-            print("add  1 section")
+        if title == "加入鬧鐘" {
             return 1
-        case .edit:
-            print("edit 2 section")
+        } else {
             return 2
         }
+//        switch alarm.modeSelection {
+//        case .add:
+//            return 1
+//        case .edit:
+//            return 2
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,6 +171,8 @@ extension AddAlarmViewController: UITableViewDataSource {
         
         
         
+        
+       
     }
 }
 

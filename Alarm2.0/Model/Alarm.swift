@@ -108,7 +108,7 @@ struct Alarm: Codable {
     var label: String = "鬧鐘"
     var isOn: Bool = true
     var selectDay: Set<Day> = []
-    var modeSelection: ModeSelection = .add
+    var modeSelection: ModelSelection = .add
     
     var repeatString: String {
         switch selectDay {
@@ -174,7 +174,7 @@ struct Alarm: Codable {
 
 
 // MARK: - Enum
-enum ModeSelection: String, CaseIterable, Codable {
+enum ModelSelection: String, CaseIterable, Codable {
     case add, edit
     
     var title: String {
