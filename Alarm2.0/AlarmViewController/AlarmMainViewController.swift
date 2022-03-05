@@ -16,7 +16,6 @@ class AlarmMainViewController: UIViewController {
     let addAlarmViewController = AddAlarmViewController()
     weak var alarmSetDelegate: AlarmSetDelegate?
 
-    
     // MARK: - UI
     let alarmMainTableView: UITableView = {
         let tableView = UITableView()
@@ -67,7 +66,8 @@ class AlarmMainViewController: UIViewController {
     }
     
     //MARK: AddButton
-    @objc func addButton() {
+    @objc
+    func addButton() {
         let vc = AddAlarmViewController()
         vc.alarmSetDelegate = self
         let navigationController = UINavigationController(rootViewController: vc)
@@ -77,8 +77,8 @@ class AlarmMainViewController: UIViewController {
     
     //MARK: - SetupViews
     func setupViews() {
-        view.addSubview(alarmMainTableView)
         
+        view.addSubview(alarmMainTableView)
         alarmMainTableView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
         }

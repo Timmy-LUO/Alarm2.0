@@ -22,7 +22,6 @@ final class AddAlarmViewController: UIViewController {
     // MARK: - UI
     let addAlarmTableView: UITableView = {
         let tableView = UITableView()
-//        tableView .register(DatePickerHeaderView.self, forHeaderFooterViewReuseIdentifier: DatePickerHeaderView.identifier)
         tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: DatePickerTableViewCell.identifier)
         tableView.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
         tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
@@ -69,7 +68,8 @@ final class AddAlarmViewController: UIViewController {
     }
     
     //MARK: - SaveButton
-    @objc func saveButton() {
+    @objc
+    func saveButton() {
         if title == "加入鬧鐘" {
             alarmSetDelegate?.saveAlarm(alarm: alarm)
         } else {
@@ -79,12 +79,14 @@ final class AddAlarmViewController: UIViewController {
     }
     
     //MARK: - CancelButton
-    @objc func cancelButton() {
+    @objc
+    func cancelButton() {
         dismiss(animated: true, completion: nil)
     }
     
     //MARK: - SetViews
     func setViews() {
+        
         view.addSubview(addAlarmTableView)
         addAlarmTableView.snp.makeConstraints { make in
             make.top.equalTo(0)
@@ -191,7 +193,6 @@ extension AddAlarmViewController: UITableViewDelegate {
         return 0
     }
 }
-
 
 //MARK: - RepeatToAdd
 extension AddAlarmViewController: RepeatToAdd {

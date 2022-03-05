@@ -22,7 +22,6 @@ class RepeatViewController: UIViewController {
         tableView.register(RepeatTableViewCell.self, forCellReuseIdentifier: RepeatTableViewCell.identifier)
         tableView.separatorStyle = .singleLine
         tableView.isScrollEnabled = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -40,11 +39,10 @@ class RepeatViewController: UIViewController {
         delegate?.repeatToAdd(repeatSet: isSelectedDay)
     }
     
-    
     //MARK: - SetupViews
     func setupViews() {
-        view.addSubview(repeatWeekTableView)
         
+        view.addSubview(repeatWeekTableView)
         repeatWeekTableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
             make.centerX.equalTo(self.view)

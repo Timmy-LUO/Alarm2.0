@@ -13,7 +13,6 @@ class AlarmLabelViewController: UIViewController {
     weak var delegate: LabelToAdd?
     var alarmLabel: String = ""
     
-    
     //MARK: - UI
     let alarmLabelTextField: UITextField = {
         let textField = UITextField()
@@ -25,7 +24,6 @@ class AlarmLabelViewController: UIViewController {
         textField.font = .systemFont(ofSize: 20)
         textField.becomeFirstResponder()
         //textField.enablesReturnKeyAutomatically = true
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -44,7 +42,6 @@ class AlarmLabelViewController: UIViewController {
                 delegate?.labelToAdd(labelSet: "鬧鐘")
             } else {
                 delegate?.labelToAdd(labelSet: text)
-                //print("\(delegate?.labelToAdd(labelSet: text))")
             }
         }
     }
@@ -64,8 +61,8 @@ class AlarmLabelViewController: UIViewController {
     
     //MARK: - SetupViews
     func setupViews() {
-        view.addSubview(alarmLabelTextField)
         
+        view.addSubview(alarmLabelTextField)
         alarmLabelTextField.snp.makeConstraints { make in
             make.top.equalTo(self.view).offset(300)
             make.centerX.equalTo(self.view)
