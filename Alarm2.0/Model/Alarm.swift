@@ -11,7 +11,7 @@ import Foundation
 // MARK: - AlarmDatabase
 class AlarmDatabase {
     
-    var valueChanged: ( ([Alarm]) -> Void)?
+    var valueChanged: (([Alarm]) -> Void)?
     
     // singleton
     private let userDefaultKey = "AlarmDatabase"
@@ -19,13 +19,13 @@ class AlarmDatabase {
     
     private(set) var alarms: [Alarm] = [] {
         didSet {
-//            saveAlarms()
+            saveAlarms()
             valueChanged?(alarms)
         }
     }
     
     init() {
-//        load()
+        load()
     }
     
     var numberOfAlarms: Int {

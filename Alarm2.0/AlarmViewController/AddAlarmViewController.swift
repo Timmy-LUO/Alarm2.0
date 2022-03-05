@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 
-class AddAlarmViewController: UIViewController {
+final class AddAlarmViewController: UIViewController {
     
     // MARK: - Properites
     var addAlarmCell: [AddCellTitle] = [.rep, .tag, .sound, .snooze]
-    
     var alarm: Alarm!
     var selection: ModelSelection?
     
@@ -23,27 +22,25 @@ class AddAlarmViewController: UIViewController {
     // MARK: - UI
     let addAlarmTableView: UITableView = {
         let tableView = UITableView()
-        tableView .register(DatePickerHeaderView.self, forHeaderFooterViewReuseIdentifier: DatePickerHeaderView.identifier)
+//        tableView .register(DatePickerHeaderView.self, forHeaderFooterViewReuseIdentifier: DatePickerHeaderView.identifier)
+        tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: DatePickerTableViewCell.identifier)
         tableView.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
         tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.sectionHeaderHeight = 200
         tableView.separatorStyle = .singleLine
-        tableView.isScrollEnabled = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.isScrollEnabled = false
         return tableView
     }()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkAlarm()
         view.backgroundColor = .black
         addAlarmTableView.dataSource = self
         addAlarmTableView.delegate = self
+        checkAlarm()
         setupNavigationBarButtonItem()
         setViews()
-        
     }
     
     //MARK: - CheckAlarmTitle
@@ -89,12 +86,11 @@ class AddAlarmViewController: UIViewController {
     //MARK: - SetViews
     func setViews() {
         view.addSubview(addAlarmTableView)
-        
         addAlarmTableView.snp.makeConstraints { make in
             make.top.equalTo(0)
             make.bottom.equalTo(0)
             make.leading.equalTo(0)
-            make.trailing.equalTo(-0)
+            make.trailing.equalTo(0)
         }
     }
 }
@@ -103,109 +99,96 @@ class AddAlarmViewController: UIViewController {
 extension AddAlarmViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if title == "加入鬧鐘" {
-            return 1
-        } else {
             return 2
+        } else {
+            return 3
         }
-//        switch alarm.modeSelection {
-//        case .add:
-//            return 1
-//        case .edit:
-//            return 2
-//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addAlarmCell.count
-        
-//        switch alarm.modeSelection {
-//        case .edit:
-//            switch section {
-//            case 0:
-//                print("c0 3")
-//                return 2
-//            case 1:
-//                print("c1 4")
-//                return 2
-//            default:
-//                print("d 1")
-//                return 2
-//            }
-//        case .add:
-//            switch section {
-//            case 0:
-//                print("c 4")
-//                return 4
-//            default:
-//                print("d 4")
-//                return 4
-//            }
-//        }
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return 4
+        } else {
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType = addAlarmCell[indexPath.row]
-        switch cellType {
-        case .snooze:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmSwitchTableViewCell.identifier, for: indexPath) as? AddAlarmSwitchTableViewCell else { return UITableViewCell() }
-            cell.titleLabel.text = addAlarmCell[indexPath.row].text
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DatePickerTableViewCell.identifier, for: indexPath) as! DatePickerTableViewCell
+            cell.dateChanged = { date in
+                self.alarm.date = date
+            }
+            
             return cell
-        default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as? AddAlarmTableViewCell else { return UITableViewCell() }
-            if indexPath.section == 0 {
-                cell.titleLabel.text = addAlarmCell[indexPath.row].text
+        } else if indexPath.section == 1 {
+            if indexPath.row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmSwitchTableViewCell.identifier, for: indexPath) as! AddAlarmSwitchTableViewCell
+                cell.titleLabel.text = "稍後提醒"
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as! AddAlarmTableViewCell
                 if indexPath.row == 0 {
+                    cell.titleLabel.text = "重複"
                     cell.contentLabel.text = alarm.repeatString
-                }
-                if indexPath.row == 1 {
+                } else if indexPath.row == 1 {
+                    cell.titleLabel.text = "標籤"
                     cell.contentLabel.text = alarm.label
-                }
-                if indexPath.row == 2 {
+                } else {
+                    cell.titleLabel.text = "提示聲"
                     cell.contentLabel.text = "經典"
                 }
                 return cell
             }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = "刪除鬧鐘"
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = .red
             return cell
         }
-        
-        
-        
-        
-        
-       
     }
 }
 
 //MARK: - UITableViewDelegate
 extension AddAlarmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellType = addAlarmCell[indexPath.row]
-        switch cellType {
-        case .rep:
-            let repeatVC = RepeatViewController()
-            repeatVC.delegate = self
-            repeatVC.isSelectedDay = alarm.selectDay
-            self.navigationController?.pushViewController(repeatVC, animated: true)
-        case .tag:
-            let alarmLabelVC = AlarmLabelViewController()
-            alarmLabelVC.delegate = self
-            alarmLabelVC.alarmLabel = alarm.label
-            self.navigationController?.pushViewController(alarmLabelVC, animated: true)
-        default:
-            break
+        if indexPath.section == 1 {
+            let cellType = addAlarmCell[indexPath.row]
+            switch cellType {
+            case .rep:
+                let repeatVC = RepeatViewController()
+                repeatVC.delegate = self
+                repeatVC.isSelectedDay = alarm.selectDay
+                self.navigationController?.pushViewController(repeatVC, animated: true)
+            case .tag:
+                let alarmLabelVC = AlarmLabelViewController()
+                alarmLabelVC.delegate = self
+                alarmLabelVC.alarmLabel = alarm.label
+                self.navigationController?.pushViewController(alarmLabelVC, animated: true)
+            default:
+                break
+            }
+        } else if indexPath.section == 2 {
+            alarmSetDelegate?.deleteAlarm(index: cellIndexPath!)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DatePickerHeaderView.identifier) as! DatePickerHeaderView
-        header.dateChanged = { [weak self] date in
-            self?.alarm.date = date
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 2 {
+            return " "
         }
-        return header
+        return " "
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 50
+        }
+        return 0
     }
 }
 

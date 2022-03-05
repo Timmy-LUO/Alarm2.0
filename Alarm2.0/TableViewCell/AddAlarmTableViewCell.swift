@@ -15,13 +15,11 @@ class AddAlarmTableViewCell: UITableViewCell {
     //MARK: - UI
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let contentLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -45,14 +43,21 @@ class AddAlarmTableViewCell: UITableViewCell {
     
     //MARK: - SetViews
     func setViews() {
-        self.addSubview(titleLabel)
-        self.addSubview(contentLabel)
         
+        let view = UIView()
+        contentView.addSubview(view)
+        view.snp.makeConstraints {make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalTo(self)
             make.leading.equalTo(self).offset(10)
         }
         
+        contentView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.top.bottom.equalTo(self)
             make.trailing.equalTo(self).offset(-50)

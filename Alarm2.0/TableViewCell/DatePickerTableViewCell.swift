@@ -1,21 +1,20 @@
 //
-//  DatePickerHeaderView.swift
+//  DatePickerTableViewCell.swift
 //  Alarm2.0
 //
-//  Created by 羅承志 on 2022/2/25.
+//  Created by 羅承志 on 2022/3/4.
 //
 
 import UIKit
-import SnapKit
 
-class DatePickerHeaderView: UITableViewHeaderFooterView {
+final class DatePickerTableViewCell: UITableViewCell {
     
-    static let identifier = "datePickerHeaderView"
+    static let identifier = "DatePickerTableViewCell"
     
     var dateChanged: ((Date) -> Void)?
     
     //MARK: - UI
-    let datePicker: UIDatePicker = {
+    private let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         // DatePicker顯示時間
         datePicker.datePickerMode = .time
@@ -23,24 +22,22 @@ class DatePickerHeaderView: UITableViewHeaderFooterView {
         datePicker.locale = Locale(identifier: "zh_Hant_TW")
         datePicker.preferredDatePickerStyle = .wheels
 //        datePicker.setValue(UIColor.white, forKey: "text")
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
+//        datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
-    
-    //MARK: - Init
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        setViews()
-    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
     
-    //MARK: - SetViews
-    func setViews() {
-        contentView.addSubview(datePicker)
+    private func setupUI() {
         
+        contentView.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -48,8 +45,10 @@ class DatePickerHeaderView: UITableViewHeaderFooterView {
         datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
     }
     
-    @objc func datePickerChanged(_ datePicker: UIDatePicker) {
+    @objc
+    private func datePickerChanged(_ datePicker: UIDatePicker) {
 //        print(datePicker.date)
         dateChanged?(datePicker.date)
     }
+    
 }

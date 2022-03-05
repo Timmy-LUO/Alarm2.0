@@ -33,7 +33,7 @@ class AlarmMainViewController: UIViewController {
         alarmMainTableView.dataSource = self
         alarmMainTableView.delegate = self
         setupViews()
-        setNavigationItem()        
+        setNavigationItem()
         database.valueChanged = { [weak self] _ in
 //            print("reload")
             self?.alarmMainTableView.reloadData()
@@ -111,13 +111,6 @@ extension AlarmMainViewController: UITableViewDelegate {
         present(navigationController, animated: true, completion: nil)
         setEditing(false, animated: false)
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        var alarm = datebase.getAlarm(at: indexPath.row)
-//        alarm.label = "123"
-//        print(alarm.id)
-//        datebase.replacingAlarm(alarm)
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
