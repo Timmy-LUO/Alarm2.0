@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AlarmMainTableViewCell: UITableViewCell {
 
@@ -15,7 +16,6 @@ class AlarmMainTableViewCell: UITableViewCell {
     var amPmLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 35)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -23,14 +23,12 @@ class AlarmMainTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 50)
         label.textColor = .lightGray
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var detailLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -38,7 +36,6 @@ class AlarmMainTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        
     }
     
     required init?(coder: NSCoder) {

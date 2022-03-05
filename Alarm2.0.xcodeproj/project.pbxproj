@@ -27,6 +27,7 @@
 		62CF4D0727CDEE9D006B05E7 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0627CDEE9D006B05E7 /* Protocol.swift */; };
 		62CF4D0927CDFBCF006B05E7 /* RepeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */; };
 		62CF4D0B27CE17FC006B05E7 /* AlarmMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF4D0A27CE17FC006B05E7 /* AlarmMainTableViewCell.swift */; };
+		62F9D9E127D26343006FE712 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F9D9E027D26343006FE712 /* DatePickerTableViewCell.swift */; };
 		AF59FC207C5A8B674DF70046 /* Pods_Alarm2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		62CF4D0627CDEE9D006B05E7 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTableViewCell.swift; sourceTree = "<group>"; };
 		62CF4D0A27CE17FC006B05E7 /* AlarmMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMainTableViewCell.swift; sourceTree = "<group>"; };
+		62F9D9E027D26343006FE712 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		D762A1CE9CA911ABFC838716 /* Pods-Alarm2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alarm2.0.debug.xcconfig"; path = "Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 				628E754327C8A90C00776F6D /* AddAlarmTableViewCell.swift */,
 				62CF4D0827CDFBCF006B05E7 /* RepeatTableViewCell.swift */,
 				62CF4D0427CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift */,
+				62F9D9E027D26343006FE712 /* DatePickerTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				628E753627C8736700776F6D /* AddAlarmViewController.swift in Sources */,
 				62CF4D0927CDFBCF006B05E7 /* RepeatTableViewCell.swift in Sources */,
 				628E754427C8A90C00776F6D /* AddAlarmTableViewCell.swift in Sources */,
+				62F9D9E127D26343006FE712 /* DatePickerTableViewCell.swift in Sources */,
 				62CF4D0B27CE17FC006B05E7 /* AlarmMainTableViewCell.swift in Sources */,
 				62CF4D0527CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift in Sources */,
 				628E754227C879C100776F6D /* TimerViewController.swift in Sources */,
@@ -381,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

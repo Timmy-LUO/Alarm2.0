@@ -39,14 +39,20 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
     
     //MARK: - Set Views
     func setViews() {
-        self.addSubview(titleLabel)
-        self.addSubview(remindLaterSwitch)
         
+        let view = UIView()
+        contentView.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalTo(self)
             make.leading.equalTo(self).offset(10)
         }
-        
+        self.addSubview(remindLaterSwitch)
         remindLaterSwitch.snp.makeConstraints { make in
             make.top.equalTo(5)
             make.trailing.equalTo(0)
