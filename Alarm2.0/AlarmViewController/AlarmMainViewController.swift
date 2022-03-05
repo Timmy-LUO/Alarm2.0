@@ -20,7 +20,6 @@ class AlarmMainViewController: UIViewController {
     let alarmMainTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(AlarmMainTableViewCell.self, forCellReuseIdentifier: AlarmMainTableViewCell.identifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     

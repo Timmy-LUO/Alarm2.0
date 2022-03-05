@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class DatePickerTableViewCell: UITableViewCell {
+class DatePickerTableViewCell: UITableViewCell {
     
     static let identifier = "DatePickerTableViewCell"
     
     var dateChanged: ((Date) -> Void)?
     
     //MARK: - UI
-    private let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         // DatePicker顯示時間
         datePicker.datePickerMode = .time
@@ -22,10 +22,10 @@ final class DatePickerTableViewCell: UITableViewCell {
         datePicker.locale = Locale(identifier: "zh_Hant_TW")
         datePicker.preferredDatePickerStyle = .wheels
 //        datePicker.setValue(UIColor.white, forKey: "text")
-//        datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
     
+    //MARK: - Init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -35,6 +35,7 @@ final class DatePickerTableViewCell: UITableViewCell {
         setupUI()
     }
     
+    //MARK: - SetupUI
     private func setupUI() {
         
         contentView.addSubview(datePicker)
@@ -50,5 +51,4 @@ final class DatePickerTableViewCell: UITableViewCell {
 //        print(datePicker.date)
         dateChanged?(datePicker.date)
     }
-    
 }

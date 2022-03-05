@@ -22,6 +22,9 @@ final class AddAlarmViewController: UIViewController {
     // MARK: - UI
     let addAlarmTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .black
+        tableView.sectionIndexBackgroundColor = .systemGray2
+        
         tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: DatePickerTableViewCell.identifier)
         tableView.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
         tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
@@ -91,8 +94,8 @@ final class AddAlarmViewController: UIViewController {
         addAlarmTableView.snp.makeConstraints { make in
             make.top.equalTo(0)
             make.bottom.equalTo(0)
-            make.leading.equalTo(0)
-            make.trailing.equalTo(0)
+            make.leading.equalTo(10)
+            make.trailing.equalTo(-10)
         }
     }
 }
@@ -120,6 +123,7 @@ extension AddAlarmViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: DatePickerTableViewCell.identifier, for: indexPath) as! DatePickerTableViewCell
+            cell.backgroundColor = .black
             cell.dateChanged = { date in
                 self.alarm.date = date
             }
@@ -188,7 +192,7 @@ extension AddAlarmViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 2 {
-            return 50
+            return 30
         }
         return 0
     }

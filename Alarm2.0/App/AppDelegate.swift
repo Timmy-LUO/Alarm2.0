@@ -7,14 +7,44 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    var alarm: Alarm!
+    let datePickerTableViewCell = DatePickerTableViewCell()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if granted {
+                print("允許")
+            } else {
+                print("不允許")
+            }
+        }
+        
+//        UNUserNotificationCenter.current().delegate = self
+
+        let dateComponents = DateComponents(calendar: Calendar.current, year: 2022, month: 3, day: 5,
+                                            hour: 16, minute: 50, second: 00)
+        let date = dateComponents.date
+        
+
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = date
+        
+//        let repeateInterval: NSCalendar.Unit = [.NSWeekCalendarUnit]//注意这个选项才是每周。。。
+//        localNotification.repeatInterval = selectedDay == 0 ? NSCalendar.Unit(rawValue: 0) : repeateInterval
+        localNotification.timeZone = TimeZone.current
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.alertBody = "通知"
+        localNotification.userInfo = nil
+        UIApplication.shared.scheduleLocalNotification(localNotification)
+        
+        
         return true
     }
 
