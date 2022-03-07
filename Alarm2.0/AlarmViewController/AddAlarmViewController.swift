@@ -13,7 +13,7 @@ final class AddAlarmViewController: UIViewController {
     // MARK: - Properites
     var addAlarmCell: [AddCellTitle] = [.rep, .tag, .sound, .snooze]
     var alarm: Alarm!
-    var selection: ModelSelection?
+//    var selection: ModelSelection?
     
     weak var alarmSetDelegate: AlarmSetDelegate?
     var cellIndexPath: Int?
@@ -73,9 +73,14 @@ final class AddAlarmViewController: UIViewController {
     //MARK: - SaveButton
     @objc
     func saveButton() {
+
         if title == "加入鬧鐘" {
+//            alarm.localNotification()
+//            print("add \(alarm.date)")
             alarmSetDelegate?.saveAlarm(alarm: alarm)
         } else {
+//            alarm.localNotification()
+//            print("edit \(alarm.date)")
             alarmSetDelegate?.valueChange(alarm: alarm, index: cellIndexPath!)
         }
         dismiss(animated: true, completion: nil)

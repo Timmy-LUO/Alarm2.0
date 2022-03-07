@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 // 管理鬧鐘
 // MARK: - AlarmDatabase
@@ -92,7 +93,7 @@ struct Alarm: Codable {
         self.label = "鬧鐘"
         self.isOn = true
         self.selectDay = []
-        self.modeSelection = .add
+//        self.modeSelection = .add
     }
     
     static var orderNumbers = 0
@@ -108,7 +109,7 @@ struct Alarm: Codable {
     var label: String = "鬧鐘"
     var isOn: Bool = true
     var selectDay: Set<Day> = []
-    var modeSelection: ModelSelection = .add
+//    var modeSelection: ModelSelection = .add
     
     var repeatString: String {
         switch selectDay {
@@ -142,12 +143,12 @@ struct Alarm: Codable {
             if selectDay.count > 1 {
                 return "，" + selectDay
                     .sorted(by: { $0.rawValue < $1.rawValue })
-                    .map { $0.detail }
+                    .map{ $0.detail }
                     .joined(separator: " ")
             }
             return selectDay
                 .sorted(by: { $0.rawValue < $1.rawValue })
-                .map( { "，每\($0.detail)" } )
+                .map({ "，每\($0.detail)" })
                 .joined(separator: " ")
         }
     }
@@ -170,22 +171,46 @@ struct Alarm: Codable {
             return "下午"
         }
     }
+    
+    func localNotification() {
+        let alarmMainTableViewCell = AlarmMainTableViewCell()
+        let dateSwitch = alarmMainTableViewCell.dateSwitch.isOn
+        if dateSwitch {
+            let date = date
+//            print("date: \(date)")
+            let components = Calendar.current.dateComponents([ .year, .month, .day, .hour, .minute], from: date)
+//            print("components: \(components)")
+            
+            let notification = UNMutableNotificationContent()
+            notification.title = label
+            notification.body = "Hello \(label)"
+//            notification.badge = 3
+            notification.sound = UNNotificationSound.default
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            let request = UNNotificationRequest(identifier: "requestIdentifier", content: notification, trigger: trigger)
+//            print("request: \(request.content)")
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        } else {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["requestIdentifier"])
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["requestIdentifier"])
+        }
+    }
 }
 
 
 // MARK: - Enum
-enum ModelSelection: String, CaseIterable, Codable {
-    case add, edit
-    
-    var title: String {
-        switch self {
-        case .add:
-            return "加入鬧鐘"
-        case .edit:
-            return "編輯鬧鐘"
-        }
-    }
-}
+//enum ModelSelection: String, CaseIterable, Codable {
+//    case add, edit
+//    
+//    var title: String {
+//        switch self {
+//        case .add:
+//            return "加入鬧鐘"
+//        case .edit:
+//            return "編輯鬧鐘"
+//        }
+//    }
+//}
 
 enum AddCellTitle: String, CaseIterable {
     case rep, tag, sound, snooze

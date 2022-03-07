@@ -95,6 +95,7 @@ extension AlarmMainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmMainTableViewCell.identifier, for: indexPath) as? AlarmMainTableViewCell else { return UITableViewCell() }
         let alarm = database.getAlarm(at: indexPath.row)
         cell.update(alarm: alarm)
+        
         return cell
     }
 }
