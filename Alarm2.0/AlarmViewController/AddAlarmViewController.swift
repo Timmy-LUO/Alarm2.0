@@ -30,7 +30,7 @@ final class AddAlarmViewController: UIViewController {
         tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .singleLine
-//        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
     

@@ -17,6 +17,7 @@ class AlarmDatabase {
     // singleton
     private let userDefaultKey = "AlarmDatabase"
     private let userDefault = UserDefaults.standard
+    private let userNotification = UserNotification()
     
     private(set) var alarms: [Alarm] = [] {
         didSet {
@@ -107,7 +108,17 @@ struct Alarm: Codable {
     var id: Int
     var date: Date = Date()
     var label: String = "鬧鐘"
-    var isOn: Bool = true
+    var isOn: Bool = true {
+        didSet {
+            if isOn {
+                UserNotification.addNotification(alarm: self)
+            } else {
+                UserNotification.removeNotification(alarmId: id)
+            }
+        }
+    }
+    
+    
     var selectDay: Set<Day> = []
 //    var modeSelection: ModelSelection = .add
     
@@ -169,30 +180,6 @@ struct Alarm: Codable {
             return "上午"
         } else {
             return "下午"
-        }
-    }
-    
-    func localNotification() {
-        let alarmMainTableViewCell = AlarmMainTableViewCell()
-        let dateSwitch = alarmMainTableViewCell.dateSwitch.isOn
-        if dateSwitch {
-            let date = date
-//            print("date: \(date)")
-            let components = Calendar.current.dateComponents([ .year, .month, .day, .hour, .minute], from: date)
-//            print("components: \(components)")
-            
-            let notification = UNMutableNotificationContent()
-            notification.title = label
-            notification.body = "Hello \(label)"
-//            notification.badge = 3
-            notification.sound = UNNotificationSound.default
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-            let request = UNNotificationRequest(identifier: "requestIdentifier", content: notification, trigger: trigger)
-//            print("request: \(request.content)")
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        } else {
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["requestIdentifier"])
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["requestIdentifier"])
         }
     }
 }

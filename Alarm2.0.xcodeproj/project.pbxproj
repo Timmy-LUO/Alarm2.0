@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6242F41D27D6FE4D008248F4 /* UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6242F41C27D6FE4D008248F4 /* UserNotification.swift */; };
 		6269A1EB27D3218200A03625 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6269A1EA27D3218200A03625 /* DatePickerTableViewCell.swift */; };
 		628E751527C867AF00776F6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E751427C867AF00776F6D /* AppDelegate.swift */; };
 		628E751727C867AF00776F6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628E751627C867AF00776F6D /* SceneDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		0FC666ACD0D1783B96E23ECC /* Pods_Alarm2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alarm2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4216B977C073F880BF4CBF /* Pods-Alarm2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alarm2.0.release.xcconfig"; path = "Target Support Files/Pods-Alarm2.0/Pods-Alarm2.0.release.xcconfig"; sourceTree = "<group>"; };
+		6242F41C27D6FE4D008248F4 /* UserNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotification.swift; sourceTree = "<group>"; };
 		6269A1EA27D3218200A03625 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		628E751127C867AF00776F6D /* Alarm2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alarm2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		628E751427C867AF00776F6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6242F41B27D6FE2E008248F4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6242F41C27D6FE4D008248F4 /* UserNotification.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		628E750827C867AF00776F6D = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +103,7 @@
 		628E751327C867AF00776F6D /* Alarm2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				6242F41B27D6FE2E008248F4 /* Helper */,
 				628E752B27C867E700776F6D /* App */,
 				628E752E27C86BE400776F6D /* Model */,
 				628E752D27C8681900776F6D /* AlarmViewController */,
@@ -305,6 +316,7 @@
 				62CF4D0927CDFBCF006B05E7 /* RepeatTableViewCell.swift in Sources */,
 				628E754427C8A90C00776F6D /* AddAlarmTableViewCell.swift in Sources */,
 				6269A1EB27D3218200A03625 /* DatePickerTableViewCell.swift in Sources */,
+				6242F41D27D6FE4D008248F4 /* UserNotification.swift in Sources */,
 				62CF4D0B27CE17FC006B05E7 /* AlarmMainTableViewCell.swift in Sources */,
 				62CF4D0527CDBE37006B05E7 /* AddAlarmSwitchTableViewCell.swift in Sources */,
 				628E754227C879C100776F6D /* TimerViewController.swift in Sources */,

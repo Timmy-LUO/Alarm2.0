@@ -11,8 +11,8 @@ import SnapKit
 class AlarmMainTableViewCell: UITableViewCell {
 
     static let identifier = "alarmOtherTableViewCell"
-    
-    let alarm = Alarm()
+        
+    var switchToggle: ((Bool) -> Void)?
     
     // MARK: - UI
     var amPmLabel: UILabel = {
@@ -36,8 +36,8 @@ class AlarmMainTableViewCell: UITableViewCell {
     
     let dateSwitch: UISwitch = {
         let dateSwitch = UISwitch()
-//        dateSwitch.isOn = true
-        
+        dateSwitch.isOn = true
+        dateSwitch.addTarget(self, action: #selector(dateSwitchTarget), for: .valueChanged)
         return dateSwitch
     }()
     
@@ -89,7 +89,6 @@ class AlarmMainTableViewCell: UITableViewCell {
         amPmLabel.text = alarm.appearAmPm()
         timeLabel.text = alarm.appearTime()
         detailLabel.text = alarm.label + alarm.alarmAppearString
-        dateSwitch.addTarget(self, action: #selector(dateSwitchTarget), for: .allTouchEvents)
         accessoryView = dateSwitch
         dateSwitch.isOn = alarm.isOn
         editingAccessoryType = .disclosureIndicator
@@ -100,7 +99,7 @@ class AlarmMainTableViewCell: UITableViewCell {
     }
     
     @objc
-    func dateSwitchTarget() {
-        alarm.localNotification()
+    func dateSwitchTarget(_ sender: UISwitch) {
+        switchToggle?(sender.isOn)
     }
 }
