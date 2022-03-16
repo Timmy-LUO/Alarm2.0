@@ -111,8 +111,10 @@ struct Alarm: Codable {
     var isOn: Bool = true {
         didSet {
             if isOn {
+                print("isOn == true")
                 UserNotification.addNotification(alarm: self)
             } else {
+                print("isOn == false")
                 UserNotification.removeNotification(alarmId: id)
             }
         }

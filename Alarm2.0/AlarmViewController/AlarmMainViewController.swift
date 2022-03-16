@@ -76,7 +76,6 @@ class AlarmMainViewController: UIViewController {
     
     //MARK: - SetupViews
     func setupViews() {
-        
         view.addSubview(alarmMainTableView)
         alarmMainTableView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
