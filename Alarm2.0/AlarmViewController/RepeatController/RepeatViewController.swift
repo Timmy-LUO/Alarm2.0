@@ -9,29 +9,22 @@ import UIKit
 import SnapKit
 
 class RepeatViewController: UIViewController {
-    
     //MARK: - properites
+    private let repeatView = RepeatView()
     weak var delegate: RepeatToAdd?
     var days: [Day] = Day.allCases
     var isSelectedDay = Set<Day>()
     
-    //MARK: - UI
-    let repeatWeekTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .systemGray5
-        tableView.register(RepeatTableViewCell.self, forCellReuseIdentifier: RepeatTableViewCell.identifier)
-        tableView.separatorStyle = .singleLine
-        tableView.isScrollEnabled = false
-        return tableView
-    }()
-    
     //MARK: - Lifecycle
+    override func loadView() {
+        super.loadView()
+        view = repeatView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        repeatWeekTableView.dataSource = self
-        repeatWeekTableView.delegate = self
-        setupViews()
+        setupTableViewDelegate()
         setupNaviItem()
     }
     
@@ -39,19 +32,12 @@ class RepeatViewController: UIViewController {
         delegate?.repeatToAdd(repeatSet: isSelectedDay)
     }
     
-    //MARK: - SetupViews
-    func setupViews() {
-        
-        view.addSubview(repeatWeekTableView)
-        repeatWeekTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
-            make.centerX.equalTo(self.view)
-            make.width.equalTo(self.view)
-            make.height.equalTo(350)
-        }
+    private func setupTableViewDelegate() {
+        repeatView.repeatWeekTableView.dataSource = self
+        repeatView.repeatWeekTableView.delegate = self
     }
     
-    func setupNaviItem() {
+    private func setupNaviItem() {
         navigationItem.title = "重複"
         self.navigationController?.navigationBar.tintColor = .orange
     }
@@ -64,7 +50,7 @@ extension RepeatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RepeatTableViewCell.identifier, for: indexPath) as? RepeatTableViewCell else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: RepeatTableViewCell.identifier, for: indexPath) as! RepeatTableViewCell
         let day = days[indexPath.row]
         cell.textLabel?.text = day.text
         let isSelectorDayContained = isSelectedDay.contains(day)
@@ -84,7 +70,7 @@ extension RepeatViewController: UITableViewDelegate {
         } else {
             isSelectedDay.insert(day)
         }
-        repeatWeekTableView.reloadData()
+        repeatView.repeatWeekTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

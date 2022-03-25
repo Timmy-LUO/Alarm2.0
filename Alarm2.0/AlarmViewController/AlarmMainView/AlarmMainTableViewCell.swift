@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 class AlarmMainTableViewCell: UITableViewCell {
-
+    //MARK: - Properties
     static let identifier = "alarmOtherTableViewCell"
-        
     var switchToggle: ((Bool) -> Void)?
+    
     
     // MARK: - UI
     var amPmLabel: UILabel = {
@@ -55,33 +55,25 @@ class AlarmMainTableViewCell: UITableViewCell {
     
     // MARK: - SetupViews
     func setupViews() {
-        
         contentView.addSubview(amPmLabel)
         amPmLabel.snp.makeConstraints { make in
-            make.top.equalTo(-20)
+            make.top.equalTo(-45)
             make.leading.equalTo(13)
             make.bottom.equalTo(10)
         }
         
         contentView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
-            make.top.equalTo(-25)
+            make.top.equalTo(-45)
             make.leading.equalTo(amPmLabel.snp.trailing).inset(-5)
             make.bottom.equalTo(10)
         }
         
         contentView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(amPmLabel.snp.bottom).inset(40)
+            make.top.equalTo(amPmLabel.snp.bottom).inset(50)
             make.leading.equalTo(13)
-            make.bottom.equalTo(10)
         }
-        
-//        contentView.addSubview(dateSwitch)
-//        dateSwitch.snp.makeConstraints { make in
-//            make.top.bottom.equalTo(self)
-//            make.trailing.equalTo(-5)
-//        }
     }
     
     //MARK: - update
@@ -92,10 +84,6 @@ class AlarmMainTableViewCell: UITableViewCell {
         accessoryView = dateSwitch
         dateSwitch.isOn = alarm.isOn
         editingAccessoryType = .disclosureIndicator
-//        AlarmMainTableView.rowHeight = 100
-//        selectionStyle = .none
-        
-        
     }
     
     @objc

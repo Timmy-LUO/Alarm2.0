@@ -9,50 +9,53 @@ import UIKit
 import SnapKit
 
 class AlarmMainViewController: UIViewController {
-    
     // MARK: - Properites
+    private let alarmMainView = AlarmMainView()
     var database = AlarmDatabase()
     var tempAlarm = Alarm()
     let addAlarmViewController = AddAlarmViewController()
     weak var alarmSetDelegate: AlarmSetDelegate?
 
-    // MARK: - UI
-    let alarmMainTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(AlarmMainTableViewCell.self, forCellReuseIdentifier: AlarmMainTableViewCell.identifier)
-        return tableView
-    }()
     
     
     // MARK: - Lifecycle
+    override func loadView() {
+        super.loadView()
+        view = alarmMainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "鬧鐘"
-        alarmMainTableView.dataSource = self
-        alarmMainTableView.delegate = self
-        setupViews()
+        setupTableViewDelegate()
         setNavigationItem()
         database.valueChanged = { [weak self] _ in
 //            print("reload")
-            self?.alarmMainTableView.reloadData()
+            self?.alarmMainView.alarmMainTableView.reloadData()
         }
+    }
+    
+    //MARK: - SetupTableViewDelegate
+    private func setupTableViewDelegate() {
+        alarmMainView.alarmMainTableView.dataSource = self
+        alarmMainView.alarmMainTableView.delegate = self
     }
     
     //MARK: - SetEditing
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        alarmMainTableView.setEditing(editing, animated: true)
-        if alarmMainTableView.isEditing {
+        alarmMainView.alarmMainTableView.setEditing(editing, animated: true)
+        if alarmMainView.alarmMainTableView.isEditing {
             self.navigationItem.leftBarButtonItem?.title = "完成"
-            alarmMainTableView.allowsSelectionDuringEditing = true
+            alarmMainView.alarmMainTableView.allowsSelectionDuringEditing = true
         } else {
             self.navigationItem.leftBarButtonItem?.title = "編輯"
-            alarmMainTableView.allowsSelectionDuringEditing = false
+            alarmMainView.alarmMainTableView.allowsSelectionDuringEditing = false
         }
     }
     
     //MARK: - SetNavigationItem
-    func setNavigationItem() {
+    private func setNavigationItem() {
         //leftButton
         self.navigationItem.leftBarButtonItem = editButtonItem
         editButtonItem.tintColor = .orange
@@ -64,7 +67,7 @@ class AlarmMainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = addButton
     }
     
-    //MARK: AddButton
+    //MARK: - AddButton
     @objc
     func addButton() {
         let vc = AddAlarmViewController()
@@ -74,13 +77,7 @@ class AlarmMainViewController: UIViewController {
         setEditing(false, animated: false)
     }
     
-    //MARK: - SetupViews
-    func setupViews() {
-        view.addSubview(alarmMainTableView)
-        alarmMainTableView.snp.makeConstraints { make in
-            make.edges.equalTo(self.view)
-        }
-    }
+    
 }
 
 //MARK: - TableViewDataSource
@@ -112,7 +109,7 @@ extension AlarmMainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 110
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

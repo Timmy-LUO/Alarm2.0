@@ -12,8 +12,6 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-   
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -25,21 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("不允許")
             }
         }
-        
-//        let dateComponents = DateComponents(calendar: Calendar.current, year: 2022, month: 3, day: 7, hour: 10, minute: 57, second: 00)
-//        let date = dateComponents.date
-//        
-//        let localNotification = UILocalNotification()
-//        localNotification.fireDate = date
-//        print("localNotification \(date)")
-//    //        let repeateInterval: NSCalendar.Unit = [.NSWeekCalendarUnit]   //注意这个选项才是每周。。。
-//    //        localNotification.repeatInterval = selectedDay == 0 ? NSCalendar.Unit(rawValue: 0) : repeateInterval
-//        localNotification.timeZone = TimeZone.current
-//        localNotification.soundName = UILocalNotificationDefaultSoundName
-//        localNotification.alertBody = "本地推播通知"
-//        localNotification.userInfo = nil
-//        UIApplication.shared.scheduleLocalNotification(localNotification)
-        
         return true
     }
 

@@ -94,7 +94,6 @@ struct Alarm: Codable {
         self.label = "鬧鐘"
         self.isOn = true
         self.selectDay = []
-//        self.modeSelection = .add
     }
     
     static var orderNumbers = 0
@@ -120,9 +119,7 @@ struct Alarm: Codable {
         }
     }
     
-    
     var selectDay: Set<Day> = []
-//    var modeSelection: ModelSelection = .add
     
     var repeatString: String {
         switch selectDay {
@@ -186,21 +183,7 @@ struct Alarm: Codable {
     }
 }
 
-
 // MARK: - Enum
-//enum ModelSelection: String, CaseIterable, Codable {
-//    case add, edit
-//    
-//    var title: String {
-//        switch self {
-//        case .add:
-//            return "加入鬧鐘"
-//        case .edit:
-//            return "編輯鬧鐘"
-//        }
-//    }
-//}
-
 enum AddCellTitle: String, CaseIterable {
     case rep, tag, sound, snooze
     

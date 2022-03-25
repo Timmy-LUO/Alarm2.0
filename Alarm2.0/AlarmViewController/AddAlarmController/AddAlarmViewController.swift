@@ -11,38 +11,30 @@ import SnapKit
 final class AddAlarmViewController: UIViewController {
     
     // MARK: - Properites
+    private let addAlarmView = AddAlarmView()
     var addAlarmCell: [AddCellTitle] = [.rep, .tag, .sound, .snooze]
     var alarm: Alarm!
-//    var selection: ModelSelection?
-    
-    weak var alarmSetDelegate: AlarmSetDelegate?
     var cellIndexPath: Int?
-    
-    
-    // MARK: - UI
-    let addAlarmTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .black
-        tableView.sectionIndexBackgroundColor = .systemGray2
-        
-        tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: DatePickerTableViewCell.identifier)
-        tableView.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
-        tableView.register(AddAlarmSwitchTableViewCell.self, forCellReuseIdentifier: AddAlarmSwitchTableViewCell.identifier)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .singleLine
-        tableView.isScrollEnabled = false
-        return tableView
-    }()
+    weak var alarmSetDelegate: AlarmSetDelegate?
     
     //MARK: - Lifecycle
+    override func loadView() {
+        super.loadView()
+        view = addAlarmView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        addAlarmTableView.dataSource = self
-        addAlarmTableView.delegate = self
         checkAlarm()
         setupNavigationBarButtonItem()
-        setViews()
+        setupTableViewDelegate()
+    }
+    
+    //MARK: - SetupTableViewDelegate
+    private func setupTableViewDelegate() {
+        addAlarmView.addAlarmTableView.dataSource = self
+        addAlarmView.addAlarmTableView.delegate = self
     }
     
     //MARK: - CheckAlarmTitle
@@ -58,7 +50,7 @@ final class AddAlarmViewController: UIViewController {
     }
     
     //MARK: - SetNaviBarItem
-    func setupNavigationBarButtonItem() {
+    private func setupNavigationBarButtonItem() {
         //Left Button
         let cancelButton = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelButton))
         cancelButton.tintColor = .orange
@@ -90,18 +82,6 @@ final class AddAlarmViewController: UIViewController {
     @objc
     func cancelButton() {
         dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK: - SetViews
-    func setViews() {
-        
-        view.addSubview(addAlarmTableView)
-        addAlarmTableView.snp.makeConstraints { make in
-            make.top.equalTo(0)
-            make.bottom.equalTo(0)
-            make.leading.equalTo(10)
-            make.trailing.equalTo(-10)
-        }
     }
 }
 
@@ -207,7 +187,7 @@ extension AddAlarmViewController: UITableViewDelegate {
 extension AddAlarmViewController: RepeatToAdd {
     func repeatToAdd(repeatSet: Set<Day>) {
         alarm.selectDay = repeatSet
-        addAlarmTableView.reloadData()
+        addAlarmView.addAlarmTableView.reloadData()
     }
 }
 
@@ -215,7 +195,7 @@ extension AddAlarmViewController: RepeatToAdd {
 extension AddAlarmViewController: LabelToAdd {
     func labelToAdd(labelSet: String) {
         alarm.label = labelSet
-        addAlarmTableView.reloadData()
+        addAlarmView.addAlarmTableView.reloadData()
     }
 }
 
