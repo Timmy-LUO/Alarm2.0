@@ -45,7 +45,7 @@ class AlarmMainTableViewCell: UITableViewCell {
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
+        setupUI()
         
     }
     
@@ -53,8 +53,8 @@ class AlarmMainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - SetupViews
-    func setupViews() {
+    // MARK: - SetupUI
+    func setupUI() {
         contentView.addSubview(amPmLabel)
         amPmLabel.snp.makeConstraints { make in
             make.top.equalTo(-45)

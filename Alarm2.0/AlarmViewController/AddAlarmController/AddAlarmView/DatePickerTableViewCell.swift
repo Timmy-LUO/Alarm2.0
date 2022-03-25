@@ -38,12 +38,10 @@ class DatePickerTableViewCell: UITableViewCell {
     
     //MARK: - SetupUI
     private func setupUI() {
-        
         contentView.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
-        
         datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
     }
     

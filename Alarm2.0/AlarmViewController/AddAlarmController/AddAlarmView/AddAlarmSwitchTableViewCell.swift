@@ -28,8 +28,7 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setViews()
+        setupUI()
         self.accessoryView = remindLaterSwitch
     }
     
@@ -37,8 +36,8 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Set Views
-    func setViews() {
+    //MARK: - SetupUI
+    func setupUI() {
         let view = UIView()
         contentView.addSubview(view)
         view.snp.makeConstraints {make in
