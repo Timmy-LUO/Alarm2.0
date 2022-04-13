@@ -39,5 +39,4 @@ class RepeatView: UIView {
             make.height.equalTo(350)
         }
     }
-    
 }

@@ -47,7 +47,7 @@ class AddAlarmTableViewCell: UITableViewCell {
         contentView.addSubview(view)
         view.snp.makeConstraints {make in
             make.edges.equalToSuperview()
-            make.height.equalTo(50)
+//            make.height.equalTo(50)
         }
         
         contentView.addSubview(titleLabel)

@@ -37,8 +37,7 @@ class AlarmLabelView: UIView {
     func setupUI() {
         addSubview(alarmLabelTextField)
         alarmLabelTextField.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(300)
-            make.centerX.equalTo(self)
+            make.top.equalTo(270)
             make.leading.equalTo(10)
             make.trailing.equalTo(-10)
             make.height.equalTo(50)

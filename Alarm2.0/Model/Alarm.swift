@@ -92,7 +92,7 @@ struct Alarm: Codable {
         self.id = Alarm.getOrderNumber()
         self.date = Date()
         self.label = "鬧鐘"
-        self.isOn = true
+        self.isOn = true 
         self.selectDay = []
     }
     
@@ -109,10 +109,11 @@ struct Alarm: Codable {
     var label: String = "鬧鐘"
     var isOn: Bool = true {
         didSet {
-            if isOn {
+            if isOn == true {
                 print("isOn == true")
                 UserNotification.addNotification(alarm: self)
-            } else {
+            } 
+            if isOn == false {
                 print("isOn == false")
                 UserNotification.removeNotification(alarmId: id)
             }

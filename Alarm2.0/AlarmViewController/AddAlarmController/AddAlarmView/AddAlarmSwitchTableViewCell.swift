@@ -12,7 +12,7 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
     
     static let identifier = "addAlarmSwitchTableViewCell"
     
-    // MARK: - UI
+    // MARK: - UIs
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -21,7 +21,6 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
     
     let remindLaterSwitch: UISwitch = {
         let laterSwitch = UISwitch()
-        laterSwitch.isOn = true
         return laterSwitch
     }()
     
@@ -42,7 +41,7 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
         contentView.addSubview(view)
         view.snp.makeConstraints {make in
             make.edges.equalToSuperview()
-            make.height.equalTo(50)
+//            make.height.equalTo(50)
         }
         
         self.addSubview(titleLabel)

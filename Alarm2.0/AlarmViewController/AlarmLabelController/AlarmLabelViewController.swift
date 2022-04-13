@@ -15,6 +15,11 @@ class AlarmLabelViewController: UIViewController {
     var alarmLabel: String = ""
     
     //MARK: - Lifecycle
+    override func loadView() {
+        super.loadView()
+        view = alarmLabelView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6

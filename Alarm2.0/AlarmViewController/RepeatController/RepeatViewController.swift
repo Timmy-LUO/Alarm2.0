@@ -32,11 +32,13 @@ class RepeatViewController: UIViewController {
         delegate?.repeatToAdd(repeatSet: isSelectedDay)
     }
     
+    //MARK: - SetupTableViewDelegate
     private func setupTableViewDelegate() {
         repeatView.repeatWeekTableView.dataSource = self
         repeatView.repeatWeekTableView.delegate = self
     }
     
+    //MARK: - SetupNaviItem
     private func setupNaviItem() {
         navigationItem.title = "重複"
         self.navigationController?.navigationBar.tintColor = .orange

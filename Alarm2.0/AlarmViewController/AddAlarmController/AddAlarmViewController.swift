@@ -112,8 +112,8 @@ extension AddAlarmViewController: UITableViewDataSource {
             cell.dateChanged = { date in
                 self.alarm.date = date
             }
-            
             return cell
+            
         } else if indexPath.section == 1 {
             if indexPath.row == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmSwitchTableViewCell.identifier, for: indexPath) as! AddAlarmSwitchTableViewCell
