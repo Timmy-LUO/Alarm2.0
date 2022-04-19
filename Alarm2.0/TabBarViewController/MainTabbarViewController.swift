@@ -9,7 +9,6 @@ import UIKit
 
 class MainTabbarViewController: UITabBarController {
     
-    
     //MARK: - Properites
     let worldClockVC = WorldClockViewController()
     let alarmVC = AlarmMainViewController()
