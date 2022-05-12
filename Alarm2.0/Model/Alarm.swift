@@ -187,7 +187,7 @@ struct Alarm: Codable {
 // MARK: - Enum
 enum AddCellTitle: String, CaseIterable {
     case rep, tag, sound, snooze
-    
+
     var text: String {
         switch self {
         case .rep:

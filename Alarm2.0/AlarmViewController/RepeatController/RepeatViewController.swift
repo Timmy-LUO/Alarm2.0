@@ -55,6 +55,7 @@ extension RepeatViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: RepeatTableViewCell.identifier, for: indexPath) as! RepeatTableViewCell
         let day = days[indexPath.row]
         cell.textLabel?.text = day.text
+        cell.tintColor = UIColor.orange
         let isSelectorDayContained = isSelectedDay.contains(day)
         cell.accessoryType = isSelectorDayContained ? .checkmark : .none
         

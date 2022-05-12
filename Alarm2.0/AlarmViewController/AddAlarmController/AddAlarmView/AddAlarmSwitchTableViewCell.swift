@@ -39,7 +39,7 @@ class AddAlarmSwitchTableViewCell: UITableViewCell {
     func setupUI() {
         let view = UIView()
         contentView.addSubview(view)
-        view.snp.makeConstraints {make in
+        view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
 //            make.height.equalTo(50)
         }
